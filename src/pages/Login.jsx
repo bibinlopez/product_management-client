@@ -19,8 +19,16 @@ function Login() {
     setEmail("")
     setPassword("")
     try {
-      const result = await axios.post(url, { email, password })
-      toast.success(result?.data?.message || "success")
+      const response = await axios.post(url, { email, password })
+      const token = response?.data?.token
+      console.log({ token })
+
+      if (token) {
+        localStorage.setItem("accessToken", token)
+
+        console.log("token stored.")
+      }
+      toast.success(response?.data?.message || "success")
       navigate("/")
     } catch (error) {
       toast.error(error?.response?.data?.message || "Something went wrong !!!")
@@ -30,9 +38,6 @@ function Login() {
   return (
     <>
       <div className='w-auto h-screen lg:flex lg:flex-col-2 md:flex md:flex-col-2 bg-blue-100'>
-        {/* Left Side - Sign In Prompt */}
-
-        {/* Right Side - Create Account Form */}
         <div className='lg:w-5/8 md:w-5/8 bg-white p-20 md:p-30 lg:p-60 flex flex-col justify-center'>
           <h2 className='text-2xl font-bold mb-8 text-yellow-600'>
             Sign In into Your Account

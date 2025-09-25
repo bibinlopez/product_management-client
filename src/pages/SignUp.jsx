@@ -22,7 +22,15 @@ function SignUp() {
     setEmail("")
     setPassword("")
     try {
-      const result = await axios.post(url, { name, email, password })
+      const response = await axios.post(url, { name, email, password })
+      const token = response?.data?.token
+      console.log({ token })
+
+      if (token) {
+        localStorage.setItem("accessToken", token)
+
+        console.log("token stored.")
+      }
       toast.success("User Created Successfully")
       navigate("/")
     } catch (error) {
@@ -33,7 +41,7 @@ function SignUp() {
   return (
     <>
       <div className='w-auto h-screen lg:flex lg:flex-col-2 md:flex md:flex-col-2 bg-blue-100'>
-        {/* Left Side - Sign In Prompt */}
+        {/* Left Side */}
         <div className='lg:w-3/8 md:w-3/8 bg-blue-900 p-12 flex flex-col items-center justify-center text-white relative'>
           <h2 className='text-3xl font-bold mb-4'>Welcome Back!</h2>
           <p className='mb-8 text-center'>
@@ -46,7 +54,7 @@ function SignUp() {
             </button>
           </Link>
         </div>
-        {/* Right Side - Create Account Form */}
+        {/* Right Side */}
         <div className='lg:w-5/8 md:w-5/8 bg-white p-20 md:p-30 lg:p-55 flex flex-col justify-center'>
           <h2 className='text-2xl font-bold mb-8 text-yellow-600'>
             Create Account

@@ -1,31 +1,60 @@
 import "./App.css"
 import { ToastContainer } from "react-toastify"
 
-import { createBrowserRouter, RouterProvider, Routes } from "react-router-dom"
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate,
+  Outlet,
+} from "react-router-dom"
 import SignUp from "./pages/SignUp"
 import Login from "./pages/Login"
 
 function App() {
+  // Protected Route
+  const ProtectedRoute = () => {
+    const token = localStorage.getItem("accessToken")
+
+    return token ? <Outlet /> : <Navigate to='/login' replace />
+  }
+
+  // Public Route
+  const PublicRoute = () => {
+    const token = localStorage.getItem("accessToken")
+
+    return token ? <Navigate to='/' replace /> : <Outlet />
+  }
+
   const router = createBrowserRouter([
     {
-      path: "/",
-      // element: <HomeLayout />,
-      element: <div> welcome to home page</div>,
+      element: <ProtectedRoute />,
+      children: [
+        {
+          path: "/",
+          element: <div> welcome to home page</div>,
+        },
+      ],
+      errorElement: <div>error page</div>,
     },
     {
-      path: "/login",
-      element: <Login />,
+      element: <PublicRoute />,
+      children: [
+        { path: "/login", element: <Login /> },
+        {
+          path: "/sign-up",
+          element: <SignUp />,
+        },
+      ],
     },
     {
-      path: "/sign-up",
-      element: <SignUp />,
+      path: "*",
+      element: localStorage.getItem("accessToken") ? (
+        <Navigate to='/' replace />
+      ) : (
+        <Navigate to='/login' replace />
+      ),
     },
-    // {
-    //   path: "/product",
-    //   element: <ProductDetails />,
-    // },
   ])
-
   return (
     <>
       <ToastContainer position='top-center' />
