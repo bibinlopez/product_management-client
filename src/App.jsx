@@ -3,6 +3,7 @@ import { ToastContainer } from "react-toastify"
 
 import { createBrowserRouter, RouterProvider, Routes } from "react-router-dom"
 import SignUp from "./pages/SignUp"
+import Login from "./pages/Login"
 
 function App() {
   const router = createBrowserRouter([
@@ -11,10 +12,10 @@ function App() {
       // element: <HomeLayout />,
       element: <div> welcome to home page</div>,
     },
-    // {
-    //   path: "/login",
-    //   element: <Login />,
-    // },
+    {
+      path: "/login",
+      element: <Login />,
+    },
     {
       path: "/sign-up",
       element: <SignUp />,
