@@ -9,6 +9,7 @@ import {
 } from "react-router-dom"
 import SignUp from "./pages/SignUp"
 import Login from "./pages/Login"
+import HomeLayout from "./pages/HomeLayout"
 
 function App() {
   // Protected Route
@@ -31,7 +32,7 @@ function App() {
       children: [
         {
           path: "/",
-          element: <div> welcome to home page</div>,
+          element: <HomeLayout />,
         },
       ],
       errorElement: <div>error page</div>,
@@ -57,7 +58,7 @@ function App() {
   ])
   return (
     <>
-      <ToastContainer position='top-center' />
+      <ToastContainer autoClose={2000} position='top-center' />
       <RouterProvider router={router} />
     </>
   )
