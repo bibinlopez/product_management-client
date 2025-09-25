@@ -1,14 +1,34 @@
-import { useState } from "react"
-import reactLogo from "./assets/react.svg"
-import viteLogo from "/vite.svg"
 import "./App.css"
+import { ToastContainer } from "react-toastify"
+
+import { createBrowserRouter, RouterProvider, Routes } from "react-router-dom"
+import SignUp from "./pages/SignUp"
 
 function App() {
-  const [count, setCount] = useState(0)
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      // element: <HomeLayout />,
+      element: <div> welcome to home page</div>,
+    },
+    // {
+    //   path: "/login",
+    //   element: <Login />,
+    // },
+    {
+      path: "/sign-up",
+      element: <SignUp />,
+    },
+    // {
+    //   path: "/product",
+    //   element: <ProductDetails />,
+    // },
+  ])
 
   return (
     <>
-      <h1 class='text-3xl font-bold underline text-blue-500'>Hello world!</h1>
+      <ToastContainer position='top-center' />
+      <RouterProvider router={router} />
     </>
   )
 }
