@@ -4,8 +4,6 @@ import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 import { GoHeart } from "react-icons/go"
 
-const isLoggedIn = null
-
 const Navbar = ({ wishlist, setIsWishlistModalOpen }) => {
   const navigate = useNavigate()
 

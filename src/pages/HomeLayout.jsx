@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import Navbar from "../components/Navbar"
 import axios from "axios"
 import WishlistModal from "../components/Wishlist"
+import MainPage from "./MainPage"
 
 const HomeLayout = () => {
   const [wishlist, setWishlist] = useState(null)
@@ -32,8 +33,7 @@ const HomeLayout = () => {
         wishlist={wishlist}
         setIsWishlistModalOpen={setIsWishlistModalOpen}
       />
-      {/* <div> Hoem layout</div>
-      <ProductPage /> */}
+      <MainPage />
       <WishlistModal
         wishlist={wishlist}
         isWishlistModalOpen={isWishlistModalOpen}
