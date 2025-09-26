@@ -6,7 +6,7 @@ const CategorySidebar = () => {
   const [categoriesData, setCategoriesData] = useState([])
   const [subcategories, setSubcategories] = useState([])
 
-  const url = "http://localhost:4000/api/product/categories"
+  const url = "http://localhost:4000/api/product/categories-subcategories"
 
   const token = localStorage.getItem("accessToken")
   useEffect(() => {

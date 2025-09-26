@@ -1,5 +1,3 @@
-import { IoCartOutline } from "react-icons/io5"
-
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 import { GoHeart } from "react-icons/go"
@@ -13,7 +11,7 @@ const Navbar = ({ wishlist, setIsWishlistModalOpen }) => {
 
   return (
     <nav className='w-full h-20 bg-[#003057] flex items-center justify-between px-8 py-3'>
-      <div className='flex relative items-center flex-1 pl-28 justify-center'>
+      <div className='flex relative items-center flex-1 pl-40 justify-center'>
         <div className='absolute left-0 pl-8 hidden md:block sm:block'>
           <h2 className='text-white font-bold text-2xl'>
             {user ? `Hey, ${user}...` : "Hey, User..."}
