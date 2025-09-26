@@ -2,10 +2,11 @@ import { IoCartOutline } from "react-icons/io5"
 
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
+import { GoHeart } from "react-icons/go"
 
 const isLoggedIn = null
 
-const Navbar = ({ wishlist }) => {
+const Navbar = ({ wishlist, setIsWishlistModalOpen }) => {
   const navigate = useNavigate()
 
   console.log({ wishlist })
@@ -46,14 +47,21 @@ const Navbar = ({ wishlist }) => {
             Sign Out
           </span>
         </div>
-        <div className='flex items-center space-x-1 cursor-pointer'>
+        <div
+          className='flex items-center space-x-1 cursor-pointer'
+          onClick={() => {
+            console.log("wishlist click")
+
+            setIsWishlistModalOpen(true)
+          }}
+        >
           <span>
-            <IoCartOutline className='text-white' size='2rem' />
+            <GoHeart className='text-white' size='1.5rem' />
           </span>
           <span className='bg-yellow-600 text-white text-xs font-bold px-2 py-0.5 rounded-full shadow'>
             {wishlist ? wishlist.count : 0}
           </span>
-          <span className='text-white'>Cart</span>
+          <span className='text-white'>Wishlist</span>
         </div>
       </div>
     </nav>

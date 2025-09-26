@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react"
 import Navbar from "../components/Navbar"
 import axios from "axios"
+import WishlistModal from "../components/Wishlist"
 
 const HomeLayout = () => {
   const [wishlist, setWishlist] = useState(null)
+  const [isWishlistModalOpen, setIsWishlistModalOpen] = useState(null)
 
-  const url = "http://localhost:4000/api/product/wishlist"
+  const url = "http://localhost:4000/api/wishlist"
 
   const token = localStorage.getItem("accessToken")
   useEffect(() => {
@@ -22,13 +24,21 @@ const HomeLayout = () => {
     }
 
     fetchData()
-  }, [])
+  }, [isWishlistModalOpen])
 
   return wishlist ? (
     <>
-      <Navbar wishlist={wishlist} />
+      <Navbar
+        wishlist={wishlist}
+        setIsWishlistModalOpen={setIsWishlistModalOpen}
+      />
       {/* <div> Hoem layout</div>
       <ProductPage /> */}
+      <WishlistModal
+        wishlist={wishlist}
+        isWishlistModalOpen={isWishlistModalOpen}
+        setIsWishlistModalOpen={setIsWishlistModalOpen}
+      />
     </>
   ) : (
     <h1>loading...</h1>
