@@ -3,14 +3,21 @@ import { IoCartOutline } from "react-icons/io5"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 
-const Navbar = () => {
+const isLoggedIn = null
+
+const Navbar = ({ wishlist }) => {
   const navigate = useNavigate()
+
+  console.log({ wishlist })
+
+  const user = localStorage.getItem("user")
+
   return (
     <nav className='w-full h-20 bg-[#003057] flex items-center justify-between px-8 py-3'>
       <div className='flex relative items-center flex-1 pl-28 justify-center'>
         <div className='absolute left-0 pl-8 hidden md:block sm:block'>
           <h2 className='text-white font-bold text-2xl'>
-            hi, bibinasdfasdfasdfa
+            {user ? `Hey, ${user}...` : "Hey, User..."}
           </h2>
         </div>
         <div className='mx-auto hidden md:block sm:block'>
@@ -44,7 +51,7 @@ const Navbar = () => {
             <IoCartOutline className='text-white' size='2rem' />
           </span>
           <span className='bg-yellow-600 text-white text-xs font-bold px-2 py-0.5 rounded-full shadow'>
-            {1}
+            {wishlist ? wishlist.count : 0}
           </span>
           <span className='text-white'>Cart</span>
         </div>

@@ -24,12 +24,16 @@ function SignUp() {
     try {
       const response = await axios.post(url, { name, email, password })
       const token = response?.data?.token
-      console.log({ token })
+      const user = response?.data?.user
 
       if (token) {
         localStorage.setItem("accessToken", token)
 
         console.log("token stored.")
+      }
+      if (user) {
+        localStorage.setItem("name", user)
+        localStorage.setItem("userId", user.id)
       }
       toast.success("User Created Successfully")
       navigate("/")

@@ -21,12 +21,18 @@ function Login() {
     try {
       const response = await axios.post(url, { email, password })
       const token = response?.data?.token
-      console.log({ token })
+      const user = response?.data?.user
 
       if (token) {
         localStorage.setItem("accessToken", token)
 
         console.log("token stored.")
+      }
+      if (user) {
+        console.log(user.name)
+
+        localStorage.setItem("user", user.name)
+        localStorage.setItem("userId", user.id)
       }
       toast.success(response?.data?.message || "success")
       navigate("/")
