@@ -8,7 +8,7 @@ import { useState } from "react"
 import { RiLockPasswordLine } from "react-icons/ri"
 import { MdOutlineEmail } from "react-icons/md"
 
-const url = "http://localhost:4000/api/auth/login"
+const url = `${import.meta.env.VITE_BASE_API_URL}/api/auth/login`
 
 function Login() {
   const navigate = useNavigate()
@@ -25,12 +25,8 @@ function Login() {
 
       if (token) {
         localStorage.setItem("accessToken", token)
-
-        console.log("token stored.")
       }
       if (user) {
-        console.log(user.name)
-
         localStorage.setItem("user", user.name)
         localStorage.setItem("userId", user.id)
       }
@@ -60,8 +56,6 @@ function Login() {
                 placeholder='Email'
                 className='bg-gray-100 outline-none flex-1 w-full'
                 onChange={(e) => {
-                  console.log("this email")
-
                   setEmail(e.target.value)
                 }}
               />

@@ -13,9 +13,9 @@ const ProductDetails = () => {
   let [quantity, setQuantity] = useState(1)
   const { id } = useParams()
 
-  const url = `http://localhost:4000/api/product/${id}`
-  const urlAdd = `http://localhost:4000/api/wishlist`
-  const productBuyUrl = `http://localhost:4000/api/product/buy`
+  const url = `${import.meta.env.VITE_BASE_API_URL}/api/product/${id}`
+  const urlAdd = `${import.meta.env.VITE_BASE_API_URL}/api/wishlist`
+  const productBuyUrl = `${import.meta.env.VITE_BASE_API_URL}/api/product/buy`
 
   const token = localStorage.getItem("accessToken")
   useEffect(() => {
@@ -26,7 +26,6 @@ const ProductDetails = () => {
         })
         const product = response?.data?.product
         const variants = response?.data?.variants
-        console.log(response.data)
 
         setProduct(product)
         setVariants(variants)
@@ -81,8 +80,6 @@ const ProductDetails = () => {
   }
 
   const handleVariantSelect = (index) => {
-    console.log(variantSelect.quantity)
-
     setVariantSelect(variants[index])
   }
 
@@ -136,12 +133,6 @@ const ProductDetails = () => {
           </div>
           <div className='mb-2 flex gap-5 items-center'>
             <span className='text-gray-500 text-sm'>Availability :</span>
-            {/* <span className='flex items-center gap-1 text-green-600 text-sm font-medium'>
-              <span className='text-lg'>✔</span> In stock
-            </span> */}
-            {/* <span className='flex items-center gap-1 text-green-600 text-sm font-medium'>
-              <span className='text-lg'>✔ ✖</span> In stock
-            </span> */}
 
             {variantSelect.quantity !== 0 ? (
               <span className='flex items-center gap-1 text-green-600 text-sm font-medium'>
@@ -163,18 +154,10 @@ const ProductDetails = () => {
             product left in stock!
           </div>
           <hr className='mb-6' />
-          {/* Ram Selection */}
+
           <div className='mb-4 flex items-center gap-4'>
             <span className='text-gray-500 text-base'>Ram:</span>
-            {/* <button className='bg-gray-200 w-14 py-1 rounded mb-1 text-gray-700 font-medium'>
-              4 GB
-            </button>
-            <button className='bg-gray-200 w-14 py-1 rounded mb-1 text-gray-700 font-medium'>
-              8 GB
-            </button>
-            <button className='bg-gray-200 w-14 py-1 rounded mb-1 text-gray-700 font-medium'>
-              16 GB
-            </button> */}
+
             {variants.map((variant, index) => {
               return (
                 <button
@@ -185,8 +168,6 @@ const ProductDetails = () => {
                       : "bg-gray-100"
                   }`}
                   onClick={() => {
-                    console.log({ variant, variantSelect })
-
                     handleVariantSelect(index)
                   }}
                 >
@@ -223,28 +204,19 @@ const ProductDetails = () => {
           </div>
           {/* Actions */}
           <div className='flex items-center gap-6'>
-            <button className='bg-amber-400 hover:bg-amber-500 text-white px-7 py-3 rounded font-medium'>
+            <button className='bg-yellow-500 hover:bg-amber-500 text-white px-7 py-3 rounded font-medium'>
               Edit product
             </button>
             <button
-              className='bg-amber-400 hover:bg-amber-500 text-white px-7 py-3 rounded font-medium cursor-pointer'
+              className='bg-yellow-500 hover:bg-amber-500 text-white px-7 py-3 rounded font-medium cursor-pointer'
               onClick={handleBuy}
             >
               Buy it now
             </button>
-            {/* <button
-              className='rounded-full border-2 border-gray-200 w-10 h-10 text-red-500 flex items-center justify-center hover:border-gray-400'
-              onClick={() => {
-                handleWishlist()
-              }}
-            > */}
-            {/* <FaRegHeart className='   w-10 h-10  flex items-center justify-center hover:border-gray-400' />
-            {/* </button> */}
 
             <span
               className='cursor-pointer'
               onClick={() => {
-                console.log("span clicked")
                 handleWishlist()
               }}
             >

@@ -24,7 +24,7 @@ function ProductCard({ product }) {
         {product.title}
       </a>
       <div className='text-[#888] font-semibold text-base'>
-        {product.tempPrice}
+        ₹ {product.tempPrice}
       </div>
       <div className='text-gray-300 flex space-x-1 text-xl'>
         {"★★★★★".split("").map((star, i) => (
@@ -45,8 +45,6 @@ function ProductGrid({
   setPage,
   page,
 }) {
-  // products api
-
   return (
     <main className='grid w-full px-30 py-3 mt-5'>
       <div className=''>
@@ -92,7 +90,7 @@ function ActionButtons({
   return (
     <div className='flex gap-4 justify-end '>
       <button
-        className='bg-[#FFA800] text-white font-semibold px-6 py-2 rounded-lg cursor-pointer'
+        className='bg-yellow-500 text-white font-semibold px-6 py-2 rounded-lg cursor-pointer'
         onClick={() => {
           setIsCategoryModalOpen(true)
         }}
@@ -100,7 +98,7 @@ function ActionButtons({
         Add category
       </button>
       <button
-        className='bg-[#FFA800] text-white font-semibold px-6 py-2 rounded-lg cursor-pointer'
+        className='bg-yellow-500 text-white font-semibold px-6 py-2 rounded-lg cursor-pointer'
         onClick={() => {
           setIsSubategoryModalOpen(true)
         }}
@@ -108,7 +106,7 @@ function ActionButtons({
         Add sub category
       </button>
       <button
-        className='bg-[#FFA800] text-white font-semibold px-6 py-2 rounded-lg cursor-pointer'
+        className='bg-yellow-500 text-white font-semibold px-6 py-2 rounded-lg cursor-pointer'
         onClick={() => {
           setIsProductModalOpen(true)
         }}
@@ -125,6 +123,8 @@ export default function MainPage({
   setPage,
   subcategories,
   setSubcategories,
+  addProduct,
+  setAddProduct,
 }) {
   const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false)
   const [isSubcategoryModalOpen, setIsSubcategoryModalOpen] = useState(false)
@@ -155,6 +155,8 @@ export default function MainPage({
       <AddProductModal
         isProductModalOpen={isProductModalOpen}
         setIsProductModalOpen={setIsProductModalOpen}
+        addProduct={addProduct}
+        setAddProduct={setAddProduct}
       />
     </div>
   )

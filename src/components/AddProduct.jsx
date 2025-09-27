@@ -3,7 +3,12 @@ import React, { useState, useEffect } from "react"
 import { toast } from "react-toastify"
 import ImageInput from "./ImageInput"
 
-const AddProductModal = ({ isProductModalOpen, setIsProductModalOpen }) => {
+const AddProductModal = ({
+  isProductModalOpen,
+  setIsProductModalOpen,
+  addProduct,
+  setAddProduct,
+}) => {
   const [variants, setVariants] = useState([
     { ram: "", price: "", quantity: 1 },
   ])
@@ -14,8 +19,6 @@ const AddProductModal = ({ isProductModalOpen, setIsProductModalOpen }) => {
   const [imageLoading, setImageLoading] = useState(false)
   const [images, setImages] = useState(["", "", ""])
 
-  console.log(subcategoryId)
-
   const token = localStorage.getItem("accessToken")
 
   // Add a new empty variant
@@ -23,8 +26,10 @@ const AddProductModal = ({ isProductModalOpen, setIsProductModalOpen }) => {
     setVariants([...variants, { ram: "", price: "", quantity: 1 }])
   }
 
-  const urlGet = "http://localhost:4000/api/product/subcategories"
-  const urlAdd = "http://localhost:4000/api/product"
+  const urlGet = `${
+    import.meta.env.VITE_BASE_API_URL
+  }/api/product/subcategories`
+  const urlAdd = `${import.meta.env.VITE_BASE_API_URL}/api/product`
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,16 +38,13 @@ const AddProductModal = ({ isProductModalOpen, setIsProductModalOpen }) => {
           headers: { Authorization: `Bearer ${token}` },
         })
         const subcategories = response?.data?.subcategories
-        console.log(subcategories)
 
         setSubcategories(subcategories)
       } catch (error) {
-        console.log(error.response)
-
         toast.error(
           error?.response?.data?.message || "Something went wrong !!!"
         )
-        // console.error("Error fetching data:", error)
+        console.error("Error fetching data:", error)
       }
     }
 
@@ -52,7 +54,6 @@ const AddProductModal = ({ isProductModalOpen, setIsProductModalOpen }) => {
   // Add Product
   const handleSubmit = async () => {
     const data = { title, description, subcategoryId, variants, images }
-    console.log(data)
 
     try {
       await axios.post(urlAdd, data, {
@@ -65,20 +66,19 @@ const AddProductModal = ({ isProductModalOpen, setIsProductModalOpen }) => {
       setDescription("")
       setImageLoading(false)
       setVariants([{ ram: "", price: "", quantity: 1 }])
+      setAddProduct(addProduct + 1)
     } catch (err) {
       toast.error(err?.response?.data?.message || "Something went wrong !!!")
       console.error("Error posting data:", err)
     }
   }
 
-  // Update a specific input in a specific row
   const handleInputChange = (variantIndex, inputName, value) => {
     const newVariants = [...variants]
 
     newVariants[variantIndex][inputName] = value
     setVariants(newVariants)
   }
-  console.log(isProductModalOpen)
 
   if (!isProductModalOpen) return null
   return (
@@ -116,16 +116,6 @@ const AddProductModal = ({ isProductModalOpen, setIsProductModalOpen }) => {
                   }}
                   className='flex gap-2 items-center pl-34'
                 >
-                  {/* <input
-                    type='text'
-                    value={row.input1}
-                    onChange={(e) => handleInputChange(index, "input1", e)}
-                  />
-                  <input
-                    type='text'
-                    value={row.input2}
-                    onChange={(e) => handleInputChange(index, "input2", e)}
-                  /> */}
                   <span className='text-gray-400'>RAM:</span>
                   <input
                     type='text'
@@ -202,8 +192,6 @@ const AddProductModal = ({ isProductModalOpen, setIsProductModalOpen }) => {
               placeholder='Designed to be easily carried and used anywhere due to its compact, foldable design and integrated battery. '
               value={description}
               onChange={(e) => {
-                console.log(description)
-
                 setDescription(e.target.value)
               }}
             />

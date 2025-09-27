@@ -31,10 +31,8 @@ const Navbar = ({ wishlist, setIsWishlistModalOpen, setSearchText }) => {
             }}
           />
           <button
-            className='bg-yellow-600 text-white px-6 py-2 rounded-r-full font-semibold cursor-pointer'
+            className='bg-yellow-500 text-white px-6 py-2 rounded-r-full font-semibold cursor-pointer'
             onClick={() => {
-              console.log("search button")
-
               setSearchText(search)
             }}
           >
@@ -48,7 +46,7 @@ const Navbar = ({ wishlist, setIsWishlistModalOpen, setSearchText }) => {
             className='text-white border-r border-gray-400 pr-3'
             onClick={() => {
               localStorage.removeItem("accessToken")
-              console.log("clicked hey...")
+
               toast.success("User logout successfully")
               navigate("/login")
             }}
@@ -59,8 +57,6 @@ const Navbar = ({ wishlist, setIsWishlistModalOpen, setSearchText }) => {
         <div
           className='flex items-center space-x-1 cursor-pointer'
           onClick={() => {
-            console.log("wishlist click")
-
             setIsWishlistModalOpen(true)
           }}
         >

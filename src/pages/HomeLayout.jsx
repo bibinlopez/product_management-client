@@ -9,11 +9,15 @@ const HomeLayout = () => {
   const [isWishlistModalOpen, setIsWishlistModalOpen] = useState(null)
   const [searchText, setSearchText] = useState("")
   const [subcategories, setSubcategories] = useState([])
-
-  const url = "http://localhost:4000/api/wishlist"
-
-  console.log({ homelayout: subcategories })
   const strSubcategories = JSON.stringify(subcategories)
+  const [products, setProducts] = useState([])
+  const [page, setPage] = useState(1)
+  const [addProduct, setAddProduct] = useState(0)
+
+  const url = `${import.meta.env.VITE_BASE_API_URL}/api/wishlist`
+  const urlProducts = `${
+    import.meta.env.VITE_BASE_API_URL
+  }/api/product/?limit=6&page=${page}&search=${searchText}&subcategoryIds=${strSubcategories}`
 
   const token = localStorage.getItem("accessToken")
   useEffect(() => {
@@ -30,23 +34,15 @@ const HomeLayout = () => {
     }
 
     fetchData()
-  }, [isWishlistModalOpen])
-
-  const [products, setProducts] = useState([])
-  const [page, setPage] = useState(1)
-
-  const urlProducts = `http://localhost:4000/api/product/?limit=6&page=${page}&search=${searchText}&subcategoryIds=${strSubcategories}`
+  }, [isWishlistModalOpen, addProduct])
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log("api call....")
-
         const response = await axios.get(urlProducts, {
           headers: { Authorization: `Bearer ${token}` },
         })
         const products = response?.data?.products
-        console.log(products)
 
         setProducts(products)
       } catch (err) {
@@ -70,6 +66,8 @@ const HomeLayout = () => {
         setPage={setPage}
         subcategories={subcategories}
         setSubcategories={setSubcategories}
+        addProduct={addProduct}
+        setAddProduct={setAddProduct}
       />
       <WishlistModal
         wishlist={wishlist}

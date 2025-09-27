@@ -8,7 +8,7 @@ import axios from "axios"
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom"
 
-const url = "http://localhost:4000/api/auth/signup"
+const url = `${import.meta.env.VITE_BASE_API_URL}/api/auth/signup`
 
 function SignUp() {
   const [name, setName] = useState("")
@@ -28,8 +28,6 @@ function SignUp() {
 
       if (token) {
         localStorage.setItem("accessToken", token)
-
-        console.log("token stored.")
       }
       if (user) {
         localStorage.setItem("name", user)

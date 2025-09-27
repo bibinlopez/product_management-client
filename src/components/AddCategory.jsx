@@ -7,7 +7,7 @@ const AddCategoryModal = ({ isCategoryModalOpen, setIsCategoryModalOpen }) => {
 
   const token = localStorage.getItem("accessToken")
 
-  const url = "http://localhost:4000/api/product/category"
+  const url = `${import.meta.env.VITE_BASE_API_URL}/api/product/category`
 
   const handleSubmit = async () => {
     try {

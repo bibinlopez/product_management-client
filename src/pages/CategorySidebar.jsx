@@ -5,7 +5,9 @@ import Subcategories from "../components/Subcategory"
 const CategorySidebar = ({ subcategories, setSubcategories }) => {
   const [categoriesData, setCategoriesData] = useState([])
 
-  const url = "http://localhost:4000/api/product/categories-subcategories"
+  const url = `${
+    import.meta.env.VITE_BASE_API_URL
+  }/api/product/categories-subcategories`
 
   const token = localStorage.getItem("accessToken")
   useEffect(() => {

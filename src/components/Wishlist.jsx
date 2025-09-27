@@ -11,7 +11,7 @@ const WishlistModal = ({
   isWishlistModalOpen,
   setIsWishlistModalOpen,
 }) => {
-  const url = "http://localhost:4000/api/wishlist"
+  const url = `${import.meta.env.VITE_BASE_API_URL}/api/wishlist`
 
   const token = localStorage.getItem("accessToken")
 
@@ -28,8 +28,6 @@ const WishlistModal = ({
       console.error("Error fetching data:", err)
     }
   }
-
-  console.log({ wishlist })
 
   const _wishlist = wishlist?.data
 

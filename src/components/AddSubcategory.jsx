@@ -12,8 +12,8 @@ const AddSubCategoryModal = ({
 
   const token = localStorage.getItem("accessToken")
 
-  const urlGet = "http://localhost:4000/api/product/categories"
-  const urlAdd = "http://localhost:4000/api/product/subcategory"
+  const urlGet = `${import.meta.env.VITE_BASE_API_URL}/api/product/categories`
+  const urlAdd = `${import.meta.env.VITE_BASE_API_URL}/api/product/subcategory`
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,7 +22,6 @@ const AddSubCategoryModal = ({
           headers: { Authorization: `Bearer ${token}` },
         })
         const categories = response?.data?.categories
-        console.log(categories)
 
         setCategories(categories)
       } catch (err) {
@@ -36,8 +35,6 @@ const AddSubCategoryModal = ({
   // Add Subcategory
   const handleSubmit = async () => {
     try {
-      console.log(subcategory, categoryId)
-
       await axios.post(
         urlAdd,
         {
