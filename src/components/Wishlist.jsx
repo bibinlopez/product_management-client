@@ -16,8 +16,6 @@ const WishlistModal = ({
   const token = localStorage.getItem("accessToken")
 
   const handleDelete = async (id) => {
-    console.log({ id })
-
     try {
       await axios.delete(url, {
         headers: { Authorization: `Bearer ${token}` },
@@ -31,7 +29,7 @@ const WishlistModal = ({
     }
   }
 
-  console.log("from wishlist ", wishlist)
+  console.log({ wishlist })
 
   const _wishlist = wishlist?.data
 
@@ -52,18 +50,15 @@ const WishlistModal = ({
           </div>
         </div>
         <div className='px-6 pt-4 pb-2'>
-          <div className='bg-blue-100 text-blue-700 p-1 rounded text-xs w-fit mb-4'>
-            451 × 100
-          </div>
           {_wishlist.map((item) => (
             <div
               key={item._id}
               className='flex items-center justify-between gap-2 py-4 border-b border-gray-200 last:border-b-0'
             >
               <img
-                src={item.image}
+                src={item?.variant?.product?.images[0]}
                 alt={item.title}
-                className='h-16 w-20 rounded object-contain border bg-gray-50'
+                className='h-16 w-20 rounded object-cover border bg-gray-50'
               />
               <div className='flex-1 mx-2'>
                 <div className='font-medium text-sm'>
@@ -71,13 +66,13 @@ const WishlistModal = ({
                 </div>
 
                 <div className='text-gray-600 text-xs'>
+                  {"Price: "}
                   {"₹"}
                   {item?.variant?.price}
                 </div>
                 <div className='text-gray-600 text-xs'>
-                  {"RAM "}
+                  {"RAM: "}
                   {item?.variant?.ram}
-                  {"GB"}
                 </div>
                 <div className='flex gap-1 mt-1'>
                   {Array(5)

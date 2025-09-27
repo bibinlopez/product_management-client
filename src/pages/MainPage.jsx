@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react"
-import axios from "axios"
 import { useNavigate } from "react-router-dom"
-import { ChevronRight, ChevronDown, Check } from "lucide-react"
 import CategorySidebar from "./CategorySidebar"
 import AddCategoryModal from "../components/AddCategory"
 import AddSubCategoryModal from "../components/AddSubcategory"
@@ -14,9 +12,6 @@ function ProductCard({ product }) {
     <div
       className='bg-white border border-gray-300 rounded-lg shadow p-4 flex flex-col items-center hover:shadow-md transition cursor-pointer'
       onClick={() => {
-        console.log("navigate to product")
-        console.log({ iddddddddddddd: product._id })
-
         navigate(`/product/${product._id}`)
       }}
     >

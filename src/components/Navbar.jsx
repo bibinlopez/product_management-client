@@ -15,7 +15,7 @@ const Navbar = ({ wishlist, setIsWishlistModalOpen, setSearchText }) => {
       <div className='flex relative items-center flex-1 pl-40 justify-center'>
         <div className='absolute left-0 pl-8 hidden md:block sm:block'>
           <h2 className='text-white font-bold text-2xl'>
-            {user ? `Hey, ${user}...` : "Hey, User..."}
+            {user ? `Hi, ${user}...` : "Hi, User..."}
           </h2>
         </div>
         <div className='mx-auto hidden md:block sm:block'>
