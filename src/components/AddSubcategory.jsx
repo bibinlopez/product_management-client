@@ -33,6 +33,7 @@ const AddSubCategoryModal = ({
     fetchData()
   }, [])
 
+  // Add Subcategory
   const handleSubmit = async () => {
     try {
       console.log(subcategory, categoryId)
@@ -49,10 +50,11 @@ const AddSubCategoryModal = ({
       setIsSubategoryModalOpen(false)
       setSubcategory("")
     } catch (err) {
-      toast.error("something went wrong")
+      toast.error(err?.response?.data?.message || "Something went wrong !!!")
       console.error("Error posting data:", err)
     }
   }
+
   if (!isSubategoryModalOpen) return null
   return (
     <div className='fixed inset-0 z-50 flex items-center justify-center bg-black/20 backdrop-blur-sm'>

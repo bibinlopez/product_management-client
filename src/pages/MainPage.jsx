@@ -34,13 +34,18 @@ function ProductCard({ product }) {
   )
 }
 
-function ProductGrid({ setIsCategoryModalOpen, setIsSubategoryModalOpen }) {
+function ProductGrid({
+  setIsCategoryModalOpen,
+  setIsSubategoryModalOpen,
+  setIsProductModalOpen,
+}) {
   return (
     <main className='grid w-full px-10 py-3 bg-green-600'>
       <div>
         <ActionButtons
           setIsCategoryModalOpen={setIsCategoryModalOpen}
           setIsSubategoryModalOpen={setIsSubategoryModalOpen}
+          setIsProductModalOpen={setIsProductModalOpen}
         />
         <div className='mt-5 pl-30 flex flex-wrap gap-7 justify-start bg-red-500'>
           {products.map((product, idx) => (
@@ -57,7 +62,11 @@ function ProductGrid({ setIsCategoryModalOpen, setIsSubategoryModalOpen }) {
   )
 }
 
-function ActionButtons({ setIsCategoryModalOpen, setIsSubategoryModalOpen }) {
+function ActionButtons({
+  setIsCategoryModalOpen,
+  setIsSubategoryModalOpen,
+  setIsProductModalOpen,
+}) {
   return (
     <div className='flex gap-4 justify-end '>
       <button
@@ -76,7 +85,14 @@ function ActionButtons({ setIsCategoryModalOpen, setIsSubategoryModalOpen }) {
       >
         Add sub category
       </button>
-      <button className='bg-[#FFA800] text-white font-semibold px-6 py-2 rounded-lg cursor-pointer'>
+      <button
+        className='bg-[#FFA800] text-white font-semibold px-6 py-2 rounded-lg cursor-pointer'
+        onClick={() => {
+          console.log("****************")
+
+          setIsProductModalOpen(true)
+        }}
+      >
         Add product
       </button>
     </div>
@@ -86,6 +102,7 @@ function ActionButtons({ setIsCategoryModalOpen, setIsSubategoryModalOpen }) {
 export default function MainPage() {
   const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false)
   const [isSubcategoryModalOpen, setIsSubcategoryModalOpen] = useState(false)
+  const [isProductModalOpen, setIsProductModalOpen] = useState(false)
 
   return (
     <div className='min-h-screen bg-red-600'>
@@ -96,6 +113,7 @@ export default function MainPage() {
         <ProductGrid
           setIsCategoryModalOpen={setIsCategoryModalOpen}
           setIsSubategoryModalOpen={setIsSubcategoryModalOpen}
+          setIsProductModalOpen={setIsProductModalOpen}
         />
         <AddCategoryModal
           isCategoryModalOpen={isCategoryModalOpen}
@@ -105,7 +123,10 @@ export default function MainPage() {
           isSubategoryModalOpen={isSubcategoryModalOpen}
           setIsSubategoryModalOpen={setIsSubcategoryModalOpen}
         />
-        <AddProductModal />
+        <AddProductModal
+          isProductModalOpen={isProductModalOpen}
+          setIsProductModalOpen={setIsProductModalOpen}
+        />
       </div>
     </div>
   )
