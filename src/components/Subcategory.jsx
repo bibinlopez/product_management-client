@@ -1,6 +1,8 @@
 import React, { useState } from "react"
 
 const Subcategories = ({ id, name, subcategories, setSubcategories }) => {
+  console.log(subcategories)
+
   const isTrue = subcategories.includes(id)
   const [isChecked, setIsChecked] = useState(isTrue)
 

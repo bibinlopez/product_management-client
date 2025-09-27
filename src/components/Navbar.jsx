@@ -1,11 +1,12 @@
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 import { GoHeart } from "react-icons/go"
+import { useState } from "react"
 
-const Navbar = ({ wishlist, setIsWishlistModalOpen }) => {
+const Navbar = ({ wishlist, setIsWishlistModalOpen, setSearchText }) => {
   const navigate = useNavigate()
 
-  console.log({ wishlist })
+  const [search, setSearch] = useState("")
 
   const user = localStorage.getItem("user")
 
@@ -21,10 +22,22 @@ const Navbar = ({ wishlist, setIsWishlistModalOpen }) => {
           <input
             className='rounded-l-full bg-white px-4 py-2 w-96 outline-none'
             id='search'
+            value={search}
             type='text'
             placeholder='search products...'
+            onChange={(e) => {
+              setSearch(e.target.value)
+              e.target.value ? "" : setSearchText("")
+            }}
           />
-          <button className='bg-yellow-600 text-white px-6 py-2 rounded-r-full font-semibold'>
+          <button
+            className='bg-yellow-600 text-white px-6 py-2 rounded-r-full font-semibold cursor-pointer'
+            onClick={() => {
+              console.log("search button")
+
+              setSearchText(search)
+            }}
+          >
             Search
           </button>
         </div>

@@ -2,9 +2,8 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import Subcategories from "../components/Subcategory"
 
-const CategorySidebar = () => {
+const CategorySidebar = ({ subcategories, setSubcategories }) => {
   const [categoriesData, setCategoriesData] = useState([])
-  const [subcategories, setSubcategories] = useState([])
 
   const url = "http://localhost:4000/api/product/categories-subcategories"
 
@@ -26,16 +25,16 @@ const CategorySidebar = () => {
   }, [])
 
   return (
-    <aside className='lg:w-[18rem] hidden lg:block lg:col-span-1 bg-blue-300 p-4 h-auto p-4 border-r bg-white flex-col'>
+    <aside className='lg:w-[20rem] hidden lg:block lg:col-span-1 bg-blue-300 p-4 h-auto p-4 border-r border-gray-200 bg-white flex-col'>
       <h2 className='text-blue-900 font-semibold mb-2'>All Categories</h2>
       <button
         onClick={() => {
           setSubcategories([])
         }}
-        className='text-sm text-blue-700 mb-4 hover:underline pl-50 cursor-pointer'
+        className='text-sm text-blue-700 mb-4 hover:underline pl-42 cursor-pointer'
       >
         {" "}
-        Clear All
+        Clear Filter
       </button>
       {/* Category List */}
       <ul className='space-y-3 pl-4'>

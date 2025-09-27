@@ -10,6 +10,7 @@ import {
 import SignUp from "./pages/SignUp"
 import Login from "./pages/Login"
 import HomeLayout from "./pages/HomeLayout"
+import ProductDetails from "./pages/ProductDetail"
 
 function App() {
   // Protected Route
@@ -33,6 +34,10 @@ function App() {
         {
           path: "/",
           element: <HomeLayout />,
+        },
+        {
+          path: "/product/:id",
+          element: <ProductDetails />,
         },
       ],
       errorElement: <div>error page</div>,

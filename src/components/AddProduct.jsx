@@ -54,21 +54,21 @@ const AddProductModal = ({ isProductModalOpen, setIsProductModalOpen }) => {
     const data = { title, description, subcategoryId, variants, images }
     console.log(data)
 
-    // try {
-    //   await axios.post(urlAdd, data, {
-    //     headers: { Authorization: `Bearer ${token}` },
-    //   })
-    //   toast.success("Subcategory added successfully")
-    //   setIsProductModalOpen(false)
-    //   setSubategoryId("")
-    //   setTitle("")
-    //   setDescription("")
-    //   setImageLoading(false)
-    //   setVariants([{ ram: "", price: "", quantity: 1 }])
-    // } catch (err) {
-    //   toast.error(err?.response?.data?.message || "Something went wrong !!!")
-    //   console.error("Error posting data:", err)
-    // }
+    try {
+      await axios.post(urlAdd, data, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      toast.success("Product added successfully")
+      setIsProductModalOpen(false)
+      setSubategoryId("")
+      setTitle("")
+      setDescription("")
+      setImageLoading(false)
+      setVariants([{ ram: "", price: "", quantity: 1 }])
+    } catch (err) {
+      toast.error(err?.response?.data?.message || "Something went wrong !!!")
+      console.error("Error posting data:", err)
+    }
   }
 
   // Update a specific input in a specific row
@@ -247,6 +247,7 @@ const AddProductModal = ({ isProductModalOpen, setIsProductModalOpen }) => {
               setSubategoryId("")
               setTitle("")
               setDescription("")
+              setVariants([{ ram: "", price: "", quantity: 1 }])
             }}
           >
             DISCARD
