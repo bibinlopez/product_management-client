@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom"
 const ProductDetails = () => {
   const navigate = useNavigate()
   let [product, setProduct] = useState(null)
+  let [variants, setVariants] = useState([])
   const { id } = useParams()
 
   console.log({ detailId: id })
@@ -26,13 +27,8 @@ const ProductDetails = () => {
         const variants = response?.data?.variants
         console.log(product)
 
-        const totalPrice = product.variants.reduce(
-          (accumulator, currentValue) => {
-            return accumulator + currentValue.price
-          },
-          0
-        )
         setProduct(product)
+        setVariants(variants)
       } catch (error) {
         navigate("/")
         toast.error(
@@ -105,8 +101,13 @@ const ProductDetails = () => {
             </span>
           </div>
           <div className='text-gray-500 text-sm mb-4'>
-            Hurry up! only <span className='text-orange-500'>{}</span> product
-            left in stock!
+            Hurry up! only{" "}
+            <span className='text-orange-500'>
+              {variants.reduce((accumulator, currentValue) => {
+                return accumulator + currentValue.quantity
+              }, 0)}
+            </span>{" "}
+            product left in stock!
           </div>
           <hr className='mb-6' />
           {/* Ram Selection */}
